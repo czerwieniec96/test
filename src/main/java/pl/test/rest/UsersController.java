@@ -14,7 +14,7 @@ import java.util.List;
 @Path("/users")
 public class UsersController {
     @GET
-    @Produces(MediaType.TEXT_XML)
+    @Produces(MediaType.APPLICATION_JSON)
     public List<Mesusers> getAll(){
         EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("testPU");
         EntityManager entityManager = entityManagerFactory.createEntityManager();

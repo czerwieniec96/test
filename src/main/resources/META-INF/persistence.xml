@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<persistence xmlns="http://java.sun.com/xml/ns/persistence" version="2.0">
+
+    <persistence-unit name="testPU">
+        <provider>org.hibernate.jpa.HibernatePersistenceProvider</provider>
+        <class>pl.test.model.Mesattachmentoperation</class>
+        <class>pl.test.model.Mesattachmenttechnology</class>
+        <class>pl.test.model.Mesoperation</class>
+        <class>pl.test.model.Mesoperationdictionary</class>
+        <class>pl.test.model.Mesoperationstate</class>
+        <class>pl.test.model.Mesproduct</class>
+        <class>pl.test.model.Mesproducttype</class>
+        <class>pl.test.model.Mesproductxoperation</class>
+        <class>pl.test.model.Mesresource</class>
+        <class>pl.test.model.Mesresourcexoperation</class>
+        <class>pl.test.model.Mestechnology</class>
+        <class>pl.test.model.Mestechnologygroup</class>
+        <class>pl.test.model.Mesusers</class>
+        <properties>
+            <property name="hibernate.connection.driver_class" value="org.postgresql.Driver"/>
+            <property name="hibernate.connection.url" value="jdbc:postgresql://localhost:5432/mes"/>
+            <property name="hibernate.connection.username" value="postgres"/>
+            <property name="hibernate.connection.password" value="slawcio21"/>
+            <property name="hibernate.dialect" value="org.hibernate.dialect.PostgreSQL9Dialect"/>
+
+        </properties>
+    </persistence-unit>
+</persistence>

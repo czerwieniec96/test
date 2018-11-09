@@ -39,12 +39,6 @@ public class UserEndpoint {
         return Response.ok(user).build();
     }
 
-    @DELETE
-    @Path("/{id : \\d+}")
-    public Response delete(@PathParam("id") @Min(1) Integer id) {
-        userRepo.delete(id);
-        return Response.noContent().build();
-    }
 
 
     @GET

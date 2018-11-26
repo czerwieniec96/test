@@ -1,7 +1,6 @@
 package pl.test.model;
 
 import javax.persistence.*;
-import java.util.Collection;
 
 @Entity
 public class Mesoperation {
@@ -9,12 +8,8 @@ public class Mesoperation {
     private String name;
     private String description;
     private Integer number;
-    private Collection<Mesattachmentoperation> mesattachmentoperationsByIdOperation;
     private Mestechnology mestechnologyByIdTechnology;
     private Mesoperationdictionary mesoperationdictionaryByIdOperationdictionary;
-    private Mesoperationstate mesoperationstateByIdOperationstate;
-    private Collection<Mesproductxoperation> mesproductxoperationsByIdOperation;
-    private Collection<Mesresourcexoperation> mesresourcexoperationsByIdOperation;
 
     @Id
     @Column(name = "idOperation")
@@ -80,15 +75,6 @@ public class Mesoperation {
         return result;
     }
 
-    @OneToMany(mappedBy = "mesoperationByIdOperation")
-    public Collection<Mesattachmentoperation> getMesattachmentoperationsByIdOperation() {
-        return mesattachmentoperationsByIdOperation;
-    }
-
-    public void setMesattachmentoperationsByIdOperation(Collection<Mesattachmentoperation> mesattachmentoperationsByIdOperation) {
-        this.mesattachmentoperationsByIdOperation = mesattachmentoperationsByIdOperation;
-    }
-
     @ManyToOne
     @JoinColumn(name = "idTechnology", referencedColumnName = "idTechnology", nullable = false)
     public Mestechnology getMestechnologyByIdTechnology() {
@@ -107,33 +93,5 @@ public class Mesoperation {
 
     public void setMesoperationdictionaryByIdOperationdictionary(Mesoperationdictionary mesoperationdictionaryByIdOperationdictionary) {
         this.mesoperationdictionaryByIdOperationdictionary = mesoperationdictionaryByIdOperationdictionary;
-    }
-
-    @ManyToOne
-    @JoinColumn(name = "idOperationstate", referencedColumnName = "idOperationState", nullable = false)
-    public Mesoperationstate getMesoperationstateByIdOperationstate() {
-        return mesoperationstateByIdOperationstate;
-    }
-
-    public void setMesoperationstateByIdOperationstate(Mesoperationstate mesoperationstateByIdOperationstate) {
-        this.mesoperationstateByIdOperationstate = mesoperationstateByIdOperationstate;
-    }
-
-    @OneToMany(mappedBy = "mesoperationByIdOperation")
-    public Collection<Mesproductxoperation> getMesproductxoperationsByIdOperation() {
-        return mesproductxoperationsByIdOperation;
-    }
-
-    public void setMesproductxoperationsByIdOperation(Collection<Mesproductxoperation> mesproductxoperationsByIdOperation) {
-        this.mesproductxoperationsByIdOperation = mesproductxoperationsByIdOperation;
-    }
-
-    @OneToMany(mappedBy = "mesoperationByIdOperation")
-    public Collection<Mesresourcexoperation> getMesresourcexoperationsByIdOperation() {
-        return mesresourcexoperationsByIdOperation;
-    }
-
-    public void setMesresourcexoperationsByIdOperation(Collection<Mesresourcexoperation> mesresourcexoperationsByIdOperation) {
-        this.mesresourcexoperationsByIdOperation = mesresourcexoperationsByIdOperation;
     }
 }

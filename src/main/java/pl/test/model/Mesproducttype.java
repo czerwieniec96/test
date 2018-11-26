@@ -1,14 +1,15 @@
 package pl.test.model;
 
-import javax.persistence.*;
-import java.util.Collection;
+import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 
 @Entity
 public class Mesproducttype {
     private Integer idProductType;
     private String type;
     private String description;
-    private Collection<Mesproduct> mesproductsByIdProductType;
 
     @Id
     @Column(name = "idProductType")
@@ -61,14 +62,5 @@ public class Mesproducttype {
         result = 31 * result + (type != null ? type.hashCode() : 0);
         result = 31 * result + (description != null ? description.hashCode() : 0);
         return result;
-    }
-
-    @OneToMany(mappedBy = "mesproducttypeByIdProductType")
-    public Collection<Mesproduct> getMesproductsByIdProductType() {
-        return mesproductsByIdProductType;
-    }
-
-    public void setMesproductsByIdProductType(Collection<Mesproduct> mesproductsByIdProductType) {
-        this.mesproductsByIdProductType = mesproductsByIdProductType;
     }
 }

@@ -1,6 +1,7 @@
 package pl.test.repo;
 
 import com.sun.istack.internal.NotNull;
+import pl.test.model.Mestechnologygroup;
 
 
 import javax.persistence.EntityManager;
@@ -19,14 +20,12 @@ public class TechnologyGroupRepo {
     EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("testPU");
     EntityManager em = entityManagerFactory.createEntityManager();
 
-    public List<Object[]> findById(@NotNull Integer id) {
-        TypedQuery<Object[]> query = em.createQuery("select t.name, t.number, t.description from Mestechnologygroup t where t.idTechnologyGroup =:id" , Object[].class)
-                .setParameter("id",id);
-        return query.getResultList();
+    public Mestechnologygroup findById(@NotNull Integer id) {
+        return em.find(Mestechnologygroup.class, id);
     }
 
-    public List<Object[]> findAll() {
-        TypedQuery<Object[]> query = em.createQuery("select t.name, t.number from Mestechnologygroup t", Object[].class);
+    public List<Mestechnologygroup> findAll() {
+        TypedQuery<Mestechnologygroup> query = em.createQuery("from Mestechnologygroup", Mestechnologygroup.class);
         return query.getResultList();
     }
 

@@ -1,25 +1,21 @@
 package pl.test.rest;
 
 
+import io.swagger.annotations.Api;
+import pl.test.model.Mesattachmenttechnology;
 import pl.test.model.Mestechnology;
-import pl.test.model.Mestechnologygroup;
-import pl.test.model.Mesusers;
 import pl.test.repo.TechnoAttachmentRepo;
 import pl.test.repo.TechnoRepo;
-import pl.test.repo.TechnologyGroupRepo;
-import pl.test.repo.UserRepo;
 
 import javax.inject.Inject;
-import javax.validation.constraints.Min;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import java.util.List;
 
-import static javax.transaction.Transactional.TxType.REQUIRED;
-import static javax.transaction.Transactional.TxType.SUPPORTS;
 import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
+@Api("technology")
 @Path("/t")
 public class TechnoEndpoint {
 
@@ -34,7 +30,7 @@ public class TechnoEndpoint {
     @Path("/{id : \\d+}")
     @Produces(APPLICATION_JSON)
     public Response getTehno(@PathParam("id")  Integer id) {
-        Object[] technology = technoRepo.findById(id).toArray();
+        Mestechnology technology = technoRepo.findById(id);
 
         if (technology == null)
             return Response.status(Response.Status.NOT_FOUND).build();
@@ -46,7 +42,7 @@ public class TechnoEndpoint {
     @Path("/a/{id : \\d+}")
     @Produces(APPLICATION_JSON)
     public Response getTehnoAttachment(@PathParam("id")  Integer id) {
-        Object[] attachemnt = technoAttachmentRepo.onefindById(id).toArray();
+        Mesattachmenttechnology attachemnt = technoAttachmentRepo.findAllbyID(id);
 
         if (attachemnt == null)
             return Response.status(Response.Status.NOT_FOUND).build();
@@ -56,13 +52,13 @@ public class TechnoEndpoint {
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
-    public Response getTehnos() {
-        List<Object[]> mestechnologies=technoRepo.findAll();
+    public Response getTechnos() {
+        List<Mestechnology> technologies = technoRepo.findAll();
 
-        if (mestechnologies.size() == 0)
+        if (technologies.size() == 0)
             return Response.status(Response.Status.NO_CONTENT).build();
 
-        return Response.ok(mestechnologies).build();
+        return Response.ok(technologies).build();
     }
 
 }

@@ -1,7 +1,6 @@
 package pl.test.model;
 
 import javax.persistence.*;
-import java.util.concurrent.CopyOnWriteArrayList;
 
 @Entity
 public class Mesresourcexoperation {
@@ -26,21 +25,17 @@ public class Mesresourcexoperation {
 
         Mesresourcexoperation that = (Mesresourcexoperation) o;
 
-
         if (idResourceXOperation != null ? !idResourceXOperation.equals(that.idResourceXOperation) : that.idResourceXOperation != null)
             return false;
 
         return true;
     }
 
-   /* @Override
+    @Override
     public int hashCode() {
-        int idResource;
-        int result = idResource != null ? idResource.hashCode() : 0;
-        result = 31 * result + (idResourceXOperation != null ? idResourceXOperation.hashCode() : 0);
-        return result;
+        return idResourceXOperation != null ? idResourceXOperation.hashCode() : 0;
     }
-*/
+
     @ManyToOne
     @JoinColumn(name = "idOperation", referencedColumnName = "idOperation", nullable = false)
     public Mesoperation getMesoperationByIdOperation() {

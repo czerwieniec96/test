@@ -3,11 +3,9 @@ package pl.test.model;
 import javax.persistence.Basic;
 import javax.persistence.Column;
 import javax.persistence.Entity;
-import javax.persistence.*;
+import javax.persistence.Id;
 
 @Entity
-@Table(name="mesusers")
-
 public class Mesusers {
     private Integer idUsers;
     private String name;
@@ -15,7 +13,6 @@ public class Mesusers {
 
     @Id
     @Column(name = "idUsers")
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     public Integer getIdUsers() {
         return idUsers;
     }

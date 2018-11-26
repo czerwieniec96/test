@@ -3,6 +3,7 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/../apk-front/apk-front.iml" filepath="$PROJECT_DIR$/../apk-front/apk-front.iml" />
+      <module fileurl="file://$PROJECT_DIR$/../test-front/test-front.iml" filepath="$PROJECT_DIR$/../test-front/test-front.iml" />
     </modules>
   </component>
 </project>

@@ -1,14 +1,15 @@
 package pl.test.model;
 
-import javax.persistence.*;
-import java.util.Collection;
+import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 
 @Entity
 public class Mesoperationdictionary {
     private Integer idOperationDictionary;
     private String name;
     private String description;
-    private Collection<Mesoperation> mesoperationsByIdOperationDictionary;
 
     @Id
     @Column(name = "idOperationDictionary")
@@ -61,14 +62,5 @@ public class Mesoperationdictionary {
         result = 31 * result + (name != null ? name.hashCode() : 0);
         result = 31 * result + (description != null ? description.hashCode() : 0);
         return result;
-    }
-
-    @OneToMany(mappedBy = "mesoperationdictionaryByIdOperationdictionary")
-    public Collection<Mesoperation> getMesoperationsByIdOperationDictionary() {
-        return mesoperationsByIdOperationDictionary;
-    }
-
-    public void setMesoperationsByIdOperationDictionary(Collection<Mesoperation> mesoperationsByIdOperationDictionary) {
-        this.mesoperationsByIdOperationDictionary = mesoperationsByIdOperationDictionary;
     }
 }

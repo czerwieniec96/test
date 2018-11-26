@@ -1,10 +1,8 @@
 package pl.test.repo;
 
 import com.sun.istack.internal.NotNull;
-import pl.test.model.Mesproduct;
 import pl.test.model.Mesusers;
 
-import javax.json.Json;
 import javax.persistence.*;
 import javax.transaction.Transactional;
 import java.util.List;

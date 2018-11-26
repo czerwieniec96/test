@@ -1,7 +1,6 @@
 package pl.test.model;
 
 import javax.persistence.*;
-import java.util.Collection;
 
 @Entity
 public class Mesproduct {
@@ -9,7 +8,6 @@ public class Mesproduct {
     private String name;
     private String description;
     private Mesproducttype mesproducttypeByIdProductType;
-    private Collection<Mesproductxoperation> mesproductxoperationsByIdProduct;
 
     @Id
     @Column(name = "idProduct")
@@ -71,14 +69,5 @@ public class Mesproduct {
 
     public void setMesproducttypeByIdProductType(Mesproducttype mesproducttypeByIdProductType) {
         this.mesproducttypeByIdProductType = mesproducttypeByIdProductType;
-    }
-
-    @OneToMany(mappedBy = "mesproductByIdProduct")
-    public Collection<Mesproductxoperation> getMesproductxoperationsByIdProduct() {
-        return mesproductxoperationsByIdProduct;
-    }
-
-    public void setMesproductxoperationsByIdProduct(Collection<Mesproductxoperation> mesproductxoperationsByIdProduct) {
-        this.mesproductxoperationsByIdProduct = mesproductxoperationsByIdProduct;
     }
 }

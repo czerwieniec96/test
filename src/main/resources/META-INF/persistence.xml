@@ -16,7 +16,9 @@
         <class>pl.test.model.Mestechnology</class>
         <class>pl.test.model.Mestechnologygroup</class>
         <class>pl.test.model.Mesusers</class>
+
         <properties>
+
             <property name="hibernate.connection.driver_class" value="org.postgresql.Driver"/>
             <property name="hibernate.connection.url" value="jdbc:postgresql://localhost:5432/mes"/>
             <property name="hibernate.connection.username" value="postgres"/>

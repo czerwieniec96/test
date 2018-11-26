@@ -1,7 +1,6 @@
 package pl.test.model;
 
 import javax.persistence.*;
-import java.util.Collection;
 
 @Entity
 public class Mestechnology {
@@ -9,8 +8,6 @@ public class Mestechnology {
     private Integer number;
     private String name;
     private Boolean state;
-    private Collection<Mesattachmenttechnology> mesattachmenttechnologiesByIdTechnology;
-    private Collection<Mesoperation> mesoperationsByIdTechnology;
     private Mestechnologygroup mestechnologygroupByIdTechnologyGroup;
 
     @Id
@@ -75,24 +72,6 @@ public class Mestechnology {
         result = 31 * result + (name != null ? name.hashCode() : 0);
         result = 31 * result + (state != null ? state.hashCode() : 0);
         return result;
-    }
-
-    @OneToMany(mappedBy = "mestechnologyByIdTechnology")
-    public Collection<Mesattachmenttechnology> getMesattachmenttechnologiesByIdTechnology() {
-        return mesattachmenttechnologiesByIdTechnology;
-    }
-
-    public void setMesattachmenttechnologiesByIdTechnology(Collection<Mesattachmenttechnology> mesattachmenttechnologiesByIdTechnology) {
-        this.mesattachmenttechnologiesByIdTechnology = mesattachmenttechnologiesByIdTechnology;
-    }
-
-    @OneToMany(mappedBy = "mestechnologyByIdTechnology")
-    public Collection<Mesoperation> getMesoperationsByIdTechnology() {
-        return mesoperationsByIdTechnology;
-    }
-
-    public void setMesoperationsByIdTechnology(Collection<Mesoperation> mesoperationsByIdTechnology) {
-        this.mesoperationsByIdTechnology = mesoperationsByIdTechnology;
     }
 
     @ManyToOne

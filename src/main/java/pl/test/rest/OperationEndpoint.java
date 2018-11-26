@@ -1,24 +1,18 @@
 package pl.test.rest;
 
-import pl.test.model.Mesoperation;
-import pl.test.model.Mestechnologygroup;
-import pl.test.model.Mesusers;
+import io.swagger.annotations.Api;
 import pl.test.repo.OperationAttachmentRepo;
 import pl.test.repo.OperationRepo;
-import pl.test.repo.TechnologyGroupRepo;
-import pl.test.repo.UserRepo;
 
 import javax.inject.Inject;
-import javax.validation.constraints.Min;
 import javax.ws.rs.*;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
 import java.util.List;
 
-import static javax.transaction.Transactional.TxType.REQUIRED;
-import static javax.transaction.Transactional.TxType.SUPPORTS;
 import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
+@Api("Operation")
 @Path("/O")
 public class OperationEndpoint {
 

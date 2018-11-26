@@ -4,9 +4,9 @@
     <facet type="jpa" name="JPA">
       <configuration>
         <setting name="validation-enabled" value="true" />
-        <setting name="provider-name" value="Hibernate" />
+        <setting name="provider-name" value="" />
         <datasource-mapping>
-          <factory-entry name="testPU" value="0744c4a0-cf55-4923-966a-8ac257bdf7c5" />
+          <factory-entry name="testPU" value="7f26fc6d-f07b-485b-9597-d64ac084d86b" />
         </datasource-mapping>
         <deploymentDescriptor name="persistence.xml" url="file://$MODULE_DIR$/src/main/resources/META-INF/persistence.xml" />
       </configuration>

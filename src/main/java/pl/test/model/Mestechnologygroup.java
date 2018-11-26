@@ -1,7 +1,9 @@
 package pl.test.model;
 
-import javax.persistence.*;
-import java.util.Collection;
+import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 
 @Entity
 public class Mestechnologygroup {
@@ -9,7 +11,6 @@ public class Mestechnologygroup {
     private String name;
     private String description;
     private Integer number;
-    private Collection<Mestechnology> mestechnologiesByIdTechnologyGroup;
 
     @Id
     @Column(name = "idTechnologyGroup")
@@ -74,14 +75,5 @@ public class Mestechnologygroup {
         result = 31 * result + (description != null ? description.hashCode() : 0);
         result = 31 * result + (number != null ? number.hashCode() : 0);
         return result;
-    }
-
-    @OneToMany(mappedBy = "mestechnologygroupByIdTechnologyGroup")
-    public Collection<Mestechnology> getMestechnologiesByIdTechnologyGroup() {
-        return mestechnologiesByIdTechnologyGroup;
-    }
-
-    public void setMestechnologiesByIdTechnologyGroup(Collection<Mestechnology> mestechnologiesByIdTechnologyGroup) {
-        this.mestechnologiesByIdTechnologyGroup = mestechnologiesByIdTechnologyGroup;
     }
 }

@@ -12,7 +12,6 @@ import javax.transaction.Transactional;
 
 import java.util.List;
 
-import static javax.transaction.Transactional.TxType.REQUIRED;
 import static javax.transaction.Transactional.TxType.SUPPORTS;
 
 @Transactional(SUPPORTS)
@@ -20,14 +19,13 @@ public class TechnoRepo {
     EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("testPU");
     EntityManager em = entityManagerFactory.createEntityManager();
 
-    public List<Object[]> findById(@NotNull Integer id) {
-        TypedQuery<Object[]> query = em.createQuery("select t.name, t.number, t.state, t.mestechnologygroupByIdTechnologyGroup.name from Mestechnology t where t.idTechnology =:id" , Object[].class)
-                .setParameter("id",id);
+    public Mestechnology findById(@NotNull Integer id) {
+        return em.find(Mestechnology.class, id);
+    }
+
+    public List<Mestechnology> findAll() {
+        TypedQuery<Mestechnology> query = em.createQuery("from Mestechnology", Mestechnology.class);
         return query.getResultList();
     }
 
-    public List<Object[]> findAll() {
-        TypedQuery<Object[]> query = em.createQuery("select t.name, t.number from Mestechnology t", Object[].class);
-        return query.getResultList();
-    }
 }

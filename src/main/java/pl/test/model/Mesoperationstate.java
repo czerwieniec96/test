@@ -1,14 +1,15 @@
 package pl.test.model;
 
-import javax.persistence.*;
-import java.util.Collection;
+import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 
 @Entity
 public class Mesoperationstate {
     private Integer idOperationState;
     private String state;
     private String description;
-    private Collection<Mesoperation> mesoperationsByIdOperationState;
 
     @Id
     @Column(name = "idOperationState")
@@ -61,14 +62,5 @@ public class Mesoperationstate {
         result = 31 * result + (state != null ? state.hashCode() : 0);
         result = 31 * result + (description != null ? description.hashCode() : 0);
         return result;
-    }
-
-    @OneToMany(mappedBy = "mesoperationstateByIdOperationstate")
-    public Collection<Mesoperation> getMesoperationsByIdOperationState() {
-        return mesoperationsByIdOperationState;
-    }
-
-    public void setMesoperationsByIdOperationState(Collection<Mesoperation> mesoperationsByIdOperationState) {
-        this.mesoperationsByIdOperationState = mesoperationsByIdOperationState;
     }
 }

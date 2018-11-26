@@ -1,7 +1,9 @@
 package pl.test.model;
 
-import javax.persistence.*;
-import java.util.Collection;
+import javax.persistence.Basic;
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.Id;
 
 @Entity
 public class Mesresource {
@@ -9,7 +11,6 @@ public class Mesresource {
     private String name;
     private Integer number;
     private String description;
-    private Collection<Mesresourcexoperation> mesresourcexoperationsByIdResource;
 
     @Id
     @Column(name = "idResource")
@@ -73,14 +74,5 @@ public class Mesresource {
         result = 31 * result + (number != null ? number.hashCode() : 0);
         result = 31 * result + (description != null ? description.hashCode() : 0);
         return result;
-    }
-
-    @OneToMany(mappedBy = "mesresourceByIdResource")
-    public Collection<Mesresourcexoperation> getMesresourcexoperationsByIdResource() {
-        return mesresourcexoperationsByIdResource;
-    }
-
-    public void setMesresourcexoperationsByIdResource(Collection<Mesresourcexoperation> mesresourcexoperationsByIdResource) {
-        this.mesresourcexoperationsByIdResource = mesresourcexoperationsByIdResource;
     }
 }

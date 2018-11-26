@@ -1,22 +1,15 @@
 package pl.test.rest;
-import com.sun.istack.internal.NotNull;
 import pl.test.model.Mesusers;
 import pl.test.repo.UserRepo;
 
 import javax.inject.Inject;
-import javax.persistence.*;
-import javax.transaction.Transactional;
 import javax.validation.constraints.Min;
 import javax.ws.rs.*;
-import javax.ws.rs.core.Context;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import java.net.URI;
 import java.util.List;
 
-import static javax.transaction.Transactional.TxType.REQUIRED;
-import static javax.transaction.Transactional.TxType.SUPPORTS;
 import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
 
 @Path("/User")
@@ -58,5 +51,6 @@ public class UserEndpoint {
         userRepo.delete(id);
         return Response.noContent().build();
     }
+
 }
 

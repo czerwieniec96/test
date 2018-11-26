@@ -11,4 +11,9 @@
       </profile>
     </annotationProcessing>
   </component>
+  <component name="JavacSettings">
+    <option name="ADDITIONAL_OPTIONS_OVERRIDE">
+      <module name="test" options="-endorseddirs C:\Users\Pan\Desktop\MES2\test\target/endorsed" />
+    </option>
+  </component>
 </project>

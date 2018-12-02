@@ -10,6 +10,7 @@ public class Mesattachmentoperation {
     private Mesoperation mesoperationByIdOperation;
 
     @Id
+    @GeneratedValue(strategy =GenerationType.IDENTITY)
     @Column(name = "idAttachmentOperation")
     public Integer getIdAttachmentOperation() {
         return idAttachmentOperation;

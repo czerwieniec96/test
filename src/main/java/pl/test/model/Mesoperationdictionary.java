@@ -1,9 +1,6 @@
 package pl.test.model;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import javax.persistence.*;
 
 @Entity
 public class Mesoperationdictionary {
@@ -12,6 +9,7 @@ public class Mesoperationdictionary {
     private String description;
 
     @Id
+    @GeneratedValue(strategy =GenerationType.IDENTITY)
     @Column(name = "idOperationDictionary")
     public Integer getIdOperationDictionary() {
         return idOperationDictionary;

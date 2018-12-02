@@ -10,6 +10,7 @@ public class Mesproduct {
     private Mesproducttype mesproducttypeByIdProductType;
 
     @Id
+    @GeneratedValue(strategy =GenerationType.IDENTITY)
     @Column(name = "idProduct")
     public Integer getIdProduct() {
         return idProduct;

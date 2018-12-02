@@ -10,6 +10,7 @@ public class Mesattachmenttechnology {
     private Mestechnology mestechnologyByIdTechnology;
 
     @Id
+    @GeneratedValue(strategy =GenerationType.IDENTITY)
     @Column(name = "idAttachmentTechnology")
     public Integer getIdAttachmentTechnology() {
         return idAttachmentTechnology;

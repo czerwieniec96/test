@@ -1,11 +1,12 @@
 package pl.test.model;
 
-import javax.persistence.Basic;
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
+import org.hibernate.annotations.Generated;
+import org.hibernate.annotations.GenerationTime;
+
+import javax.persistence.*;
 
 @Entity
+
 public class Mestechnologygroup {
     private Integer idTechnologyGroup;
     private String name;
@@ -13,11 +14,11 @@ public class Mestechnologygroup {
     private Integer number;
 
     @Id
+    @GeneratedValue(strategy =GenerationType.IDENTITY)
     @Column(name = "idTechnologyGroup")
     public Integer getIdTechnologyGroup() {
         return idTechnologyGroup;
     }
-
     public void setIdTechnologyGroup(Integer idTechnologyGroup) {
         this.idTechnologyGroup = idTechnologyGroup;
     }
@@ -43,7 +44,7 @@ public class Mestechnologygroup {
     }
 
     @Basic
-    @Column(name = "Number")
+    @Column(name = "Number", unique = true)
     public Integer getNumber() {
         return number;
     }

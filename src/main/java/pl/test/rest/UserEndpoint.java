@@ -46,6 +46,7 @@ public class UserEndpoint {
     }
 
     @DELETE
+
     @Path("/d/{id : \\d+}")
     public Response deleteBook(@PathParam("id") @Min(1) Integer id) {
         userRepo.delete(id);

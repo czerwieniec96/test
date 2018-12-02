@@ -9,6 +9,7 @@ public class Mesresourcexoperation {
     private Mesresource mesresourceByIdResource;
 
     @Id
+    @GeneratedValue(strategy =GenerationType.IDENTITY)
     @Column(name = "idResourceXOperation")
     public Integer getIdResourceXOperation() {
         return idResourceXOperation;

@@ -18,7 +18,7 @@ public class TechnoAttachmentRepo {
     }
 
 
-    public Mesattachmenttechnology findAllbyID(Integer id) {
+    public Mesattachmenttechnology findAllbyID() {
         TypedQuery<Mesattachmenttechnology> query = em.createQuery("from Mestechnologygroup", Mesattachmenttechnology.class);
         return (Mesattachmenttechnology) query.getResultList();
     }

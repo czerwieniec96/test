@@ -9,6 +9,7 @@ public class Mesproductxoperation {
     private Mesoperation mesoperationByIdOperation;
 
     @Id
+    @GeneratedValue(strategy =GenerationType.IDENTITY)
     @Column(name = "idProductXOperation")
     public Integer getIdProductXOperation() {
         return idProductXOperation;

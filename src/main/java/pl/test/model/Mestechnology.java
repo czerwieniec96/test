@@ -11,6 +11,7 @@ public class Mestechnology {
     private Mestechnologygroup mestechnologygroupByIdTechnologyGroup;
 
     @Id
+    @GeneratedValue(strategy =GenerationType.IDENTITY)
     @Column(name = "idTechnology")
     public Integer getIdTechnology() {
         return idTechnology;

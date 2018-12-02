@@ -4,35 +4,56 @@ import com.sun.istack.internal.NotNull;
 import pl.test.model.Mestechnologygroup;
 
 
-import javax.persistence.EntityManager;
-import javax.persistence.EntityManagerFactory;
-import javax.persistence.Persistence;
-import javax.persistence.TypedQuery;
+import javax.enterprise.inject.Produces;
+import javax.persistence.*;
 import javax.transaction.Transactional;
 
 import java.util.List;
 
-import static javax.transaction.Transactional.TxType.SUPPORTS;
+import static javax.transaction.Transactional.TxType.*;
 
 @Transactional(SUPPORTS)
 public class TechnologyGroupRepo {
 
     EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("testPU");
     EntityManager em = entityManagerFactory.createEntityManager();
+/*
+    @PersistenceContext(unitName = "testPU")
+    private EntityManager em;
+
+*/
+
 
     public Mestechnologygroup findById(@NotNull Integer id) {
         return em.find(Mestechnologygroup.class, id);
     }
 
     public List<Mestechnologygroup> findAll() {
-        TypedQuery<Mestechnologygroup> query = em.createQuery("from Mestechnologygroup", Mestechnologygroup.class);
+        TypedQuery<Mestechnologygroup> query = em.createQuery("select tg from Mestechnologygroup tg order by tg.number ASC ", Mestechnologygroup.class);
         return query.getResultList();
     }
 
+    @Transactional(REQUIRED)
+    public Mestechnologygroup create(@NotNull Mestechnologygroup techgroup) {
+        em.getTransaction().begin();
+        em.persist(techgroup);
+        em.getTransaction().commit();
+        em.close();
+        return techgroup;
+    }
 
-//dodać dodawanie i deletowanie
+    public Long countAll() {
+        TypedQuery<Long> query = em.createQuery("SELECT COUNT(b) FROM Mestechnologygroup b", Long.class);
+        return query.getSingleResult();
+    }
 
-
+    @Transactional(REQUIRED)
+    public void delete(@NotNull Integer id) {
+        em.getTransaction().begin();
+        em.remove(em.getReference(Mestechnologygroup.class, id));
+        em.getTransaction().commit();
+        em.close();
+    }
 
 
 }

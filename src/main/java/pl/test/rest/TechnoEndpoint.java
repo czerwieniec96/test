@@ -15,7 +15,7 @@ import javax.ws.rs.core.Response;
 import java.util.List;
 
 import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
-@Api("technology")
+
 @Path("/t")
 public class TechnoEndpoint {
 
@@ -42,7 +42,7 @@ public class TechnoEndpoint {
     @Path("/a/{id : \\d+}")
     @Produces(APPLICATION_JSON)
     public Response getTehnoAttachment(@PathParam("id")  Integer id) {
-        Mesattachmenttechnology attachemnt = technoAttachmentRepo.findAllbyID(id);
+        Mesattachmenttechnology attachemnt = technoAttachmentRepo.findAllbyID();
 
         if (attachemnt == null)
             return Response.status(Response.Status.NOT_FOUND).build();
@@ -60,5 +60,6 @@ public class TechnoEndpoint {
 
         return Response.ok(technologies).build();
     }
+
 
 }

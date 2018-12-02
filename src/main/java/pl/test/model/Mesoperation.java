@@ -12,6 +12,7 @@ public class Mesoperation {
     private Mesoperationdictionary mesoperationdictionaryByIdOperationdictionary;
 
     @Id
+    @GeneratedValue(strategy =GenerationType.IDENTITY)
     @Column(name = "idOperation")
     public Integer getIdOperation() {
         return idOperation;

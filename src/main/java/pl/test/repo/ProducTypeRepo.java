@@ -20,6 +20,15 @@ public class ProducTypeRepo {
         return em.find(Mesproducttype.class, id);
     }
 
+
+    public Mesproducttype getTypeByName(String type) {
+        TypedQuery<Mesproducttype> query = em.createQuery(
+                "SELECT pt FROM Mesproducttype pt WHERE pt.type = :type", Mesproducttype.class);
+                  query.setParameter("type", type);
+        return query.getSingleResult();
+    }
+
+
     public List<Mesproducttype> findAll() {
         TypedQuery<Mesproducttype> query = em.createQuery("from Mesproducttype ", Mesproducttype.class);
         return query.getResultList();

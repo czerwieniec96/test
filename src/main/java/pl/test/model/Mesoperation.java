@@ -95,4 +95,17 @@ public class Mesoperation {
     public void setMesoperationdictionaryByIdOperationdictionary(Mesoperationdictionary mesoperationdictionaryByIdOperationdictionary) {
         this.mesoperationdictionaryByIdOperationdictionary = mesoperationdictionaryByIdOperationdictionary;
     }
+
+    private Mesoperationstate idOperationstate;
+
+    @ManyToOne
+    @JoinColumn(name = "idOperationstate", referencedColumnName = "idOperationstate", nullable = false)
+
+    public Mesoperationstate getIdOperationstate() {
+        return idOperationstate;
+    }
+
+    public void setIdOperationstate(Mesoperationstate idOperationstate) {
+        this.idOperationstate = idOperationstate;
+    }
 }

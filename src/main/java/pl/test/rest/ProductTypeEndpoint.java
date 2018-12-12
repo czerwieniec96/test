@@ -25,8 +25,19 @@ public class ProductTypeEndpoint {
     @GET
     @Path("/{id : \\d+}")
     @Produces(APPLICATION_JSON)
-    public Response getProductype(@PathParam("id")  Integer id) {
+    public Response getProductypeById(@PathParam("id")  Integer id) {
         Mesproducttype type = producTypeRepo.findById(id);
+
+        if (type == null)
+            return Response.status(Response.Status.NOT_FOUND).build();
+
+        return Response.ok(type).build();
+    }
+    @GET
+    @Path("/n/{type:}")
+    @Produces(APPLICATION_JSON)
+    public Response getProductypeByType(@PathParam("type")  String type) {
+        Mesproducttype type1 = producTypeRepo.getTypeByName(type);
 
         if (type == null)
             return Response.status(Response.Status.NOT_FOUND).build();
@@ -37,6 +48,17 @@ public class ProductTypeEndpoint {
     @GET
     @Produces(MediaType.APPLICATION_JSON)
     public Response getTypes() {
+        List<Mesproducttype> types=producTypeRepo.findAll();
+
+        if (types.size() == 0)
+            return Response.status(Response.Status.NO_CONTENT).build();
+
+        return Response.ok(types).build();
+    }
+    @GET
+    @Path("/n")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Response getTypes2() {
         List<Mesproducttype> types=producTypeRepo.findAll();
 
         if (types.size() == 0)

@@ -1,6 +1,7 @@
 package pl.test.repo;
 
 import com.sun.istack.internal.NotNull;
+import pl.test.model.Mesattachmenttechnology;
 import pl.test.model.Mestechnology;
 import pl.test.model.Mestechnologygroup;
 
@@ -22,16 +23,34 @@ public class TechnoRepo {
     EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("testPU");
     EntityManager em = entityManagerFactory.createEntityManager();
 
-    @Inject
-    TechnologyGroupRepo groupRepo;
 
     public Mestechnology findById(@NotNull Integer id) {
-        return em.find(Mestechnology.class, id);
+        Mestechnology tech = em.find(Mestechnology.class, id);
+        em.close();
+        return tech;
     }
 
     public List<Mestechnology> findAll() {
         TypedQuery<Mestechnology> query = em.createQuery("from Mestechnology", Mestechnology.class);
-        return query.getResultList();
+        List <Mestechnology> mestechnologyList = query.getResultList();
+        em.close();
+        return mestechnologyList;
+    }
+
+    public Mesattachmenttechnology findAttachemntById(@NotNull Integer id) {
+        Mesattachmenttechnology mesattachmenttechnology = em.find(Mesattachmenttechnology.class, id);
+        em.close();
+        return mesattachmenttechnology;
+    }
+
+
+    public List<Mesattachmenttechnology> findAttachmentsByTechnology(Integer idTechnology) {
+        TypedQuery<Mesattachmenttechnology> query = em.createQuery("select at from Mesattachmenttechnology at " +
+                "where at.mestechnologyByIdTechnology.idTechnology = :id ", Mesattachmenttechnology.class);
+        query.setParameter("id", idTechnology);
+        List <Mesattachmenttechnology> attachmentList = query.getResultList();
+        em.close();
+        return attachmentList;
     }
 
     @Transactional(REQUIRED)
@@ -47,6 +66,23 @@ public class TechnoRepo {
     public void delete(@NotNull Integer id) {
         em.getTransaction().begin();
         em.remove(em.getReference(Mestechnology.class, id));
+        em.getTransaction().commit();
+        em.close();
+    }
+
+    @Transactional(REQUIRED)
+    public Mesattachmenttechnology createAttachment(@NotNull Mesattachmenttechnology attachment) {
+        em.getTransaction().begin();
+        em.persist(attachment);
+        em.getTransaction().commit();
+        em.close();
+        return attachment;
+    }
+
+    @Transactional(REQUIRED)
+    public void deleteAttachment(@NotNull Integer id) {
+        em.getTransaction().begin();
+        em.remove(em.getReference(Mesattachmenttechnology.class, id));
         em.getTransaction().commit();
         em.close();
     }

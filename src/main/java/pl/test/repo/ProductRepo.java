@@ -2,6 +2,7 @@ package pl.test.repo;
 
 import pl.test.model.Mesproduct;
 import pl.test.model.Mesproducttype;
+import pl.test.model.Mesresource;
 
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
@@ -23,12 +24,16 @@ public class ProductRepo {
     ProducTypeRepo producTypeRepo;
 
     public Mesproduct findById(@NotNull Integer id) {
-        return em.find(Mesproduct.class, id);
+        Mesproduct product = em.find(Mesproduct.class, id);
+        em.close();
+        return product;
     }
 
     public List<Mesproduct> findAll() {
         TypedQuery<Mesproduct> query = em.createQuery("from Mesproduct ", Mesproduct.class);
-        return query.getResultList();
+        List<Mesproduct> mesproductList = query.getResultList();
+        em.close();
+        return mesproductList;
     }
 
     @Transactional(REQUIRED)

@@ -17,17 +17,24 @@ public class OperationStateRepo {
     EntityManager em = entityManagerFactory.createEntityManager();
 
     public Mesoperationstate findById(@NotNull Integer id) {
-        return em.find(Mesoperationstate.class, id);
+        Mesoperationstate mesoperationstate = em.find(Mesoperationstate.class, id);
+        em.close();
+        return mesoperationstate;
+
     }
 
     public List<Mesoperationstate> findAll() {
-        TypedQuery<Mesoperationstate> query = em.createQuery("from Mesoperationstate ", Mesoperationstate.class);
-        return query.getResultList();
+        TypedQuery<Mesoperationstate> query = em.createQuery("from Mesoperationstate", Mesoperationstate.class);
+        List<Mesoperationstate> mesoperationstateList =query.getResultList();
+        em.close();
+        return mesoperationstateList;
     }
 
     public Long countAll() {
         TypedQuery<Long> query = em.createQuery("SELECT COUNT(os) FROM Mesoperationstate os", Long.class);
-        return query.getSingleResult();
+        Long number =query.getSingleResult();
+        em.close();
+        return number;
     }
 
     @Transactional(REQUIRED)

@@ -4,7 +4,6 @@ import io.swagger.annotations.Api;
 import pl.test.model.Mesoperation;
 import pl.test.model.Mesproductxoperation;
 import pl.test.model.Mesresourcexoperation;
-import pl.test.repo.OperationAttachmentRepo;
 import pl.test.repo.OperationRepo;
 
 import javax.inject.Inject;
@@ -22,16 +21,24 @@ import static javax.ws.rs.core.MediaType.APPLICATION_JSON;
 @Api("Operation")
 @Path("/O")
 public class OperationEndpoint {
-
     @Inject
     private OperationRepo operationRepo;
-    @Inject
-    private OperationAttachmentRepo operationAttachmentRepo;
 
+
+    @GET
+    @Path("/n/{number : \\d+}")
+    @Produces(APPLICATION_JSON)
+    public Response getOperationByNumber(@PathParam("number")  Integer number) {
+        Mesoperation operation = operationRepo.findByNumber(number);
+
+        if (operation == null)
+            return Response.status(Response.Status.NOT_FOUND).build();
+        return Response.ok(operation).build();
+    }
     @GET
     @Path("/{id : \\d+}")
     @Produces(APPLICATION_JSON)
-    public Response getOperation(@PathParam("id")  Integer id) {
+    public Response getOperationbyId(@PathParam("id")  Integer id) {
         Mesoperation operation = operationRepo.findById(id);
 
         if (operation == null)
@@ -39,28 +46,33 @@ public class OperationEndpoint {
 
         return Response.ok(operation).build();
     }
+
+
     @GET
-    @Path("/rxo/{id : \\d+}")
+    @Path("/rxo/{idoper: \\d+}")
     @Produces(APPLICATION_JSON)
-    public Response getRXO(@PathParam("id")  Integer id) {
-        Mesresourcexoperation rxo = operationRepo.findResourceXoOperationsById(id);
+    public Response getRXO(@PathParam("idoper")  Integer idoper) {
+       List<Mesresourcexoperation> rxo = operationRepo.findResourcesByOperation(idoper);
 
         if (rxo == null)
             return Response.status(Response.Status.NOT_FOUND).build();
 
         return Response.ok(rxo).build();
     }
+
     @GET
-    @Path("/pxo/{id : \\d+}")
+    @Path("/pxo/{idoper: \\d+}")
     @Produces(APPLICATION_JSON)
-    public Response getPXO(@PathParam("id")  Integer id) {
-        Mesproductxoperation pxo = operationRepo.findProductsXOpeartionsById(id);
+    public Response getPXO(@PathParam("idoper")  Integer idoper) {
+       List<Mesproductxoperation> pxo = operationRepo.findProductsByOperation(idoper);
 
         if (pxo == null)
             return Response.status(Response.Status.NOT_FOUND).build();
 
         return Response.ok(pxo).build();
     }
+
+
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)
@@ -98,17 +110,6 @@ public class OperationEndpoint {
     }
 
     @GET
-    @Path("/at/{id : \\d+}")
-    @Produces(APPLICATION_JSON)
-    public Response getAttachment(@PathParam("id")  Integer id) {
-        Object[] attachment = operationAttachmentRepo.onefindById(id).toArray();
-
-        if (attachment == null)
-            return Response.status(Response.Status.NOT_FOUND).build();
-
-        return Response.ok(attachment).build();
-    }
-    @GET
     @Path("/t/{id : \\d+}")
     @Produces(APPLICATION_JSON)
     public Response getOperationsBytech(@PathParam("id")  Integer id) {
@@ -122,9 +123,9 @@ public class OperationEndpoint {
 
     @POST
     @Consumes(APPLICATION_JSON)
-    public Response createOperation( Mesoperation operation, @Context UriInfo uriInfo) {
-        operation = operationRepo.create(operation);
-        URI createdURI = uriInfo.getBaseUriBuilder().path(operation.getIdOperation().toString()).build();
+    public Response createOperation( Mesoperation mesoperation, @Context UriInfo uriInfo) {
+        mesoperation = operationRepo.create(mesoperation);
+        URI createdURI = uriInfo.getBaseUriBuilder().path(mesoperation.getIdOperation().toString()).build();
         return Response.created(createdURI).build();
     }
 
@@ -138,9 +139,9 @@ public class OperationEndpoint {
     @POST
     @Path("/rxo")
     @Consumes(APPLICATION_JSON)
-    public Response createResourceXOperation( Mesoperation operation, @Context UriInfo uriInfo) {
-        operation = operationRepo.create(operation);
-        URI createdURI = uriInfo.getBaseUriBuilder().path(operation.getIdOperation().toString()).build();
+    public Response createResourceXOperation( Mesresourcexoperation rxo, @Context UriInfo uriInfo) {
+        rxo = operationRepo.createOperationXResource(rxo);
+        URI createdURI = uriInfo.getBaseUriBuilder().path(rxo.getMesresourceByIdResource().toString()).build();
         return Response.created(createdURI).build();
     }
 
@@ -155,9 +156,9 @@ public class OperationEndpoint {
     @POST
     @Path("/pxo")
     @Consumes(APPLICATION_JSON)
-    public Response createProductXOperation( Mesoperation operation, @Context UriInfo uriInfo) {
-        operation = operationRepo.create(operation);
-        URI createdURI = uriInfo.getBaseUriBuilder().path(operation.getIdOperation().toString()).build();
+    public Response createProductXOperation( Mesproductxoperation pxo, @Context UriInfo uriInfo) {
+        pxo = operationRepo.createOperationXProduct(pxo);
+        URI createdURI = uriInfo.getBaseUriBuilder().path(pxo.getIdProductXOperation().toString()).build();
         return Response.created(createdURI).build();
     }
 

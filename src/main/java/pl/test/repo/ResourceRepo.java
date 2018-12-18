@@ -17,17 +17,23 @@ public class ResourceRepo {
     EntityManager em = entityManagerFactory.createEntityManager();
 
     public Mesresource findById(@NotNull Integer id) {
-        return em.find(Mesresource.class, id);
+        Mesresource resource = em.find(Mesresource.class, id);
+        em.close();
+        return resource;
     }
 
     public List<Mesresource> findAll() {
         TypedQuery<Mesresource> query = em.createQuery("from Mesresource ", Mesresource.class);
-        return query.getResultList();
+        List<Mesresource> mesresourceLists = query.getResultList();
+        em.close();
+        return mesresourceLists;
     }
 
     public Long countAll() {
         TypedQuery<Long> query = em.createQuery("SELECT COUNT(r) FROM Mesresource r", Long.class);
-        return query.getSingleResult();
+        Long number = query.getSingleResult();
+        em.close();
+        return number;
     }
 
     @Transactional(REQUIRED)

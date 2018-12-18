@@ -33,17 +33,7 @@ public class ProductTypeEndpoint {
 
         return Response.ok(type).build();
     }
-    @GET
-    @Path("/n/{type:}")
-    @Produces(APPLICATION_JSON)
-    public Response getProductypeByType(@PathParam("type")  String type) {
-        Mesproducttype type1 = producTypeRepo.getTypeByName(type);
 
-        if (type == null)
-            return Response.status(Response.Status.NOT_FOUND).build();
-
-        return Response.ok(type).build();
-    }
 
     @GET
     @Produces(MediaType.APPLICATION_JSON)

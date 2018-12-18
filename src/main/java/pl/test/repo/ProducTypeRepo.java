@@ -17,26 +17,25 @@ public class ProducTypeRepo {
     EntityManager em = entityManagerFactory.createEntityManager();
 
     public Mesproducttype findById(@NotNull Integer id) {
-        return em.find(Mesproducttype.class, id);
+        Mesproducttype mesproducttype = em.find(Mesproducttype.class, id);
+        em.close();
+        return mesproducttype;
     }
 
-
-    public Mesproducttype getTypeByName(String type) {
-        TypedQuery<Mesproducttype> query = em.createQuery(
-                "SELECT pt FROM Mesproducttype pt WHERE pt.type = :type", Mesproducttype.class);
-                  query.setParameter("type", type);
-        return query.getSingleResult();
-    }
 
 
     public List<Mesproducttype> findAll() {
         TypedQuery<Mesproducttype> query = em.createQuery("from Mesproducttype ", Mesproducttype.class);
-        return query.getResultList();
+        List<Mesproducttype> mesproducttypeList = query.getResultList();
+        em.close();
+        return mesproducttypeList;
     }
 
     public Long countAll() {
         TypedQuery<Long> query = em.createQuery("SELECT COUNT(pt) FROM Mesproducttype pt", Long.class);
-        return query.getSingleResult();
+        Long number = query.getSingleResult();
+        em.close();
+        return number;
     }
 
     @Transactional(REQUIRED)

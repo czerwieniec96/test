@@ -22,12 +22,16 @@ public class OperationDictonaryRepo {
 
     public List<Mesoperationdictionary> findAll() {
         TypedQuery<Mesoperationdictionary> query = em.createQuery("from Mesoperationdictionary", Mesoperationdictionary.class);
-        return query.getResultList();
+        List<Mesoperationdictionary> mesoperationdictionaryList = query.getResultList();
+        em.close();
+        return mesoperationdictionaryList;
     }
 
     public Long countAll() {
         TypedQuery<Long> query = em.createQuery("SELECT COUNT(b) FROM Mesoperationdictionary b", Long.class);
-        return query.getSingleResult();
+        Long number = query.getSingleResult();
+        em.close();
+        return number;
     }
 
     @Transactional(REQUIRED)

@@ -1,6 +1,7 @@
 package pl.test.repo;
 
 import com.sun.istack.internal.NotNull;
+import pl.test.model.Mestechnology;
 import pl.test.model.Mestechnologygroup;
 
 
@@ -17,6 +18,7 @@ public class TechnologyGroupRepo {
 
     EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("testPU");
     EntityManager em = entityManagerFactory.createEntityManager();
+
 /*
     @PersistenceContext(unitName = "testPU")
     private EntityManager em;
@@ -25,12 +27,16 @@ public class TechnologyGroupRepo {
 
 
     public Mestechnologygroup findById(@NotNull Integer id) {
-        return em.find(Mestechnologygroup.class, id);
+        Mestechnologygroup group = em.find(Mestechnologygroup.class, id);
+        em.close();
+        return group;
     }
 
     public List<Mestechnologygroup> findAll() {
         TypedQuery<Mestechnologygroup> query = em.createQuery("select tg from Mestechnologygroup tg order by tg.number ASC ", Mestechnologygroup.class);
-        return query.getResultList();
+        List<Mestechnologygroup> groups =query.getResultList();
+        em.close();
+        return groups;
     }
 
     @Transactional(REQUIRED)
@@ -44,7 +50,9 @@ public class TechnologyGroupRepo {
 
     public Long countAll() {
         TypedQuery<Long> query = em.createQuery("SELECT COUNT(b) FROM Mestechnologygroup b", Long.class);
-        return query.getSingleResult();
+        Long number = query.getSingleResult();
+        em.close();
+        return number;
     }
 
     @Transactional(REQUIRED)

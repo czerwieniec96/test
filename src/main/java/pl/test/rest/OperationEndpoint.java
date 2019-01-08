@@ -1,6 +1,7 @@
 package pl.test.rest;
 
 import io.swagger.annotations.Api;
+import pl.test.model.Mesattachmentoperation;
 import pl.test.model.Mesoperation;
 import pl.test.model.Mesproductxoperation;
 import pl.test.model.Mesresourcexoperation;
@@ -169,5 +170,42 @@ public class OperationEndpoint {
         return Response.noContent().build();
     }
 
+    @GET
+    @Path("/ats/{id : \\d+}")
+    @Produces(APPLICATION_JSON)
+    public Response getAttachments(@PathParam("id")  Integer id) {
+        List<Mesattachmentoperation> attachments = operationRepo.findAttachmentsByOperation(id);
 
+        if (attachments.size() == 0)
+            return Response.status(Response.Status.NO_CONTENT).build();
+        return Response.ok(attachments).build();
+    }
+
+    @GET
+    @Path("/at/{id : \\d+}")
+    @Produces(APPLICATION_JSON)
+    public Response getAttachmentById(@PathParam("id")  Integer id) {
+        Mesattachmentoperation attachment = operationRepo.findAttachemntById(id);
+
+        if (attachment == null)
+            return Response.status(Response.Status.NOT_FOUND).build();
+        return Response.ok(attachment).build();
+    }
+
+
+    @POST
+    @Path("/at")
+    @Consumes(APPLICATION_JSON)
+    public Response createAttachment (Mesattachmentoperation attachment, @Context UriInfo uriInfo) {
+        attachment = operationRepo.createAttachment(attachment);
+        URI createdURI = uriInfo.getBaseUriBuilder().path(attachment.getIdAttachmentOperation().toString()).build();
+        return Response.created(createdURI).build();
+    }
+
+    @DELETE
+    @Path("/at/{id : \\d+}")
+    public Response deleteAttachment(@PathParam("id") @Min(1) Integer id) {
+        operationRepo.deleteAttachment(id);
+        return Response.noContent().build();
+    }
 }

@@ -13,8 +13,11 @@ import static javax.transaction.Transactional.TxType.REQUIRED;
 @Transactional(SUPPORTS)
 public class UserRepo {
 
-    EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("testPU");
-    EntityManager em = entityManagerFactory.createEntityManager();
+/*    EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("testPU");
+    EntityManager em = entityManagerFactory.createEntityManager();*/
+@PersistenceContext(unitName = "testPU")
+private EntityManager em;
+
 
     public Mesusers find(@NotNull Integer id) {
         return em.find(Mesusers.class, id);
